@@ -8,7 +8,8 @@ const { SECRET_KEY } = require("../../config/config");
 const User = require("../../Models/User");
 const { UserInputError } = require("apollo-server");
 
-function generateToken(user) {
+//Web Token function
+const generateToken = (user) => {
   return jwt.sign(
     {
       id: user.id,
@@ -18,7 +19,7 @@ function generateToken(user) {
     SECRET_KEY,
     { expiresIn: "1h" }
   );
-}
+};
 
 module.exports = {
   Mutation: {

@@ -1,9 +1,10 @@
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require("apollo-server");
 
 const Post = require("../../Models/Post");
 const checkAuth = require("../../utils/check-auth");
 module.exports = {
   Query: {
+    //get all posts
     async getPosts() {
       try {
         const posts = await Post.find().sort({ createdAt: -1 });
@@ -12,6 +13,8 @@ module.exports = {
         throw new Error(err);
       }
     },
+
+    //get single Post from user
     async getPost(_, { postId }) {
       try {
         const post = await Post.findById(postId);
@@ -29,7 +32,11 @@ module.exports = {
   Mutation: {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
-      console.log(user);
+
+      if (args.body.trim() === "") {
+        throw new Error("Post body must not be empty");
+      }
+
       const newPost = new Post({
         body,
         user: user.id,
@@ -38,6 +45,7 @@ module.exports = {
       });
 
       const post = await newPost.save();
+      context.pubsub.publish("NEW_POST", { newPost: post });
       return post;
     },
 
@@ -55,6 +63,33 @@ module.exports = {
       } catch (err) {
         throw new Error(error);
       }
+    },
+
+    async likePost(_, { postId }, context) {
+      const { username } = checkAuth(context);
+      const post = await Post.findById(postId);
+      if (post) {
+        if (post.likes.find((like) => like.username === username)) {
+          //Post alread likes, unlike it
+          post.likes = post.likes.filter((like) => like.username !== username);
+          //await post.save();
+        } else {
+          //Not liked, like post
+          post.likes.push({ username, createdAt: new Date().toISOString() });
+        }
+
+        await post.save();
+        return post;
+      } else {
+        throw new UserInputError("Post not found ");
+      }
+    },
+  },
+  Subscription: {
+    newPost: {
+      subscribe() {
+        subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("NEW_POST");
+      },
     },
   },
 };
