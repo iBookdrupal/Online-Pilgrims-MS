@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 
-
-
+/*
 
 export const Navbar = () => {
-  
+
   return (
     <>
       <nav className="ui top fixed inverted menu">
@@ -39,7 +38,8 @@ export const Navbar = () => {
         </div>
       </div>
     </nav>
-    
+
   </>
   )
 }
+*/
