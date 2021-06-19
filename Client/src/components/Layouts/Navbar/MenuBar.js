@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import AdminNavbar from "./AdminNavbar.js";
 
-import { AuthContext } from "./../../context/auth";
+import { AuthContext } from "./../../../context/auth.js";
 
 const MenuBar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -14,18 +15,7 @@ const MenuBar = () => {
   const handlItemClick = (e, { name }) => setActiveItem(name);
 
   const menuBar = user ? (
-    <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item
-        name={user.username}
-        active={activeItem === "home"}
-        as={Link}
-        to="/"
-      />
-
-      <Menu.Menu position="right">
-        <Menu.Item name="logout" onClick={logout} />
-      </Menu.Menu>
-    </Menu>
+    <AdminNavbar />
   ) : (
     <Menu pointing secondary size="massive" color="teal">
       <Menu.Item
@@ -34,6 +24,14 @@ const MenuBar = () => {
         onClick={handlItemClick}
         as={Link}
         to="/"
+      />
+
+      <Menu.Item
+        name="posts"
+        active={activeItem === "posts"}
+        onClick={handlItemClick}
+        as={Link}
+        to="/posts"
       />
 
       <Menu.Menu position="right">

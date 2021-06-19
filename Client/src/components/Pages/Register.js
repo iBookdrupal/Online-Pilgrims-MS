@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Grid, Segment, Message } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag";
 
@@ -37,49 +37,66 @@ const Register = (props) => {
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <h1>Register </h1>
 
-        <Form.Input
-          label="Username"
-          placeholder="Username"
-          name="username"
-          value={values.username}
-          error={errors.username ? true : false}
-          onChange={onChange}
-          type="text"
-        />
+        <Grid textAlign="center" verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Segment stacked>
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Username"
+                name="username"
+                value={values.username}
+                error={errors.username ? true : false}
+                onChange={onChange}
+                type="text"
+              />
 
-        <Form.Input
-          label="email"
-          placeholder="Email"
-          name="email"
-          value={values.email}
-          error={errors.email ? true : false}
-          onChange={onChange}
-          type="email"
-        />
+              <Form.Input
+                fluid
+                icon="envelope"
+                iconPosition="left"
+                placeholder="Email"
+                name="email"
+                value={values.email}
+                error={errors.email ? true : false}
+                onChange={onChange}
+                type="email"
+              />
 
-        <Form.Input
-          label="Password"
-          placeholder="Password"
-          name="password"
-          value={values.password}
-          error={errors.password ? true : false}
-          onChange={onChange}
-          type="password"
-        />
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                name="password"
+                value={values.password}
+                error={errors.password ? true : false}
+                onChange={onChange}
+                type="password"
+              />
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                error={errors.confirmPassword ? true : false}
+                onChange={onChange}
+                type="password"
+              />
 
-        <Form.Input
-          label="Confirm Password"
-          placeholder="Confirm Password"
-          name="confirmPassword"
-          value={values.confirmPassword}
-          error={errors.confirmPassword ? true : false}
-          onChange={onChange}
-          type="password"
-        />
+              <Button type="submit" color="teal" fluid size="large">
+                Register
+              </Button>
+            </Segment>
 
-        <Button type="submit" primary>
-          Register
-        </Button>
+            <Message>
+              Already Registered? <a href="/login">Login</a> <br />
+            </Message>
+          </Grid.Column>
+        </Grid>
       </Form>
 
       <div className="ui error message">

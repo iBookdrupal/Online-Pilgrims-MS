@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import "./Footer.css";
 export const Footer = () => {
   return (
-    <div>
-     
-		<h2>Footer</h2>
-    </div>
-  )
-}
+    <footer>
+      <div class="ui container">
+        <p> Copyright (c) 2021 - Online Pilgrims Management System </p>
+      </div>
+    </footer>
+  );
+};
