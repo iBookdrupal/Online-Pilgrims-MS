@@ -16,10 +16,10 @@ const Posts = () => {
 
   return (
     <>
-      <div class="pusher">
-        <div class="main-content">
+      <div className="pusher">
+        <div className="main-content">
           <h2>Recent Posts</h2>
-          <div class="ui grid stackable padded">
+          <div className="ui grid stackable padded">
             {user && (
               <Grid.Row>
                 <PostForm />

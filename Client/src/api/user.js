@@ -23,3 +23,14 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+export const FETCH_USERS_QUERY = gql`
+  {
+    getUsers {
+      id
+      createdAt
+      username
+      email
+    }
+  }
+`;

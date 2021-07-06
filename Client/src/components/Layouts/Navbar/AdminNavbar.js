@@ -7,93 +7,95 @@ const AdminNavbar = () => {
     <>
       <nav className="ui top fixed inverted menu">
         <div
-          class="ui sidebar inverted vertical menu sidebar-menu"
+          className="ui sidebar inverted vertical menu sidebar-menu"
           id="sidebar"
         >
-          <div class="item">
-            <div class="header">General</div>
-            <div class="menu">
-              <a class="item" href="/dashboard">
+          <div className="item">
+            <div className="header">General</div>
+            <div className="menu">
+              <a className="item" href="/dashboard">
                 <div>
-                  <i class="icon tachometer alternate"></i>
+                  <i className="icon tachometer alternate"></i>
                   {user.username} Dashboard
                 </div>
               </a>
             </div>
           </div>
-          <div class="item">
-            <div class="header">Administration</div>
-            <div class="menu">
-              <a class="item">
+          <div className="item">
+            <div className="header">Registration</div>
+            <div className="menu">
+              <a className="item">
                 <div>
-                  <i class="cogs icon"></i>Settings
+                  <i className="cogs icon"></i>Bio-Data
                 </div>
               </a>
-              <a class="item" href="/posts">
+              <a className="item" href="/users">
                 <div>
-                  <i class="users icon"></i>Posts
+                  <i className="users icon"></i>Users
                 </div>
               </a>
             </div>
           </div>
 
-          <a href="#" class="item">
+          <a href="#" className="item">
             <div>
-              <i class="icon chart line"></i>
+              <i className="icon chart line"></i>
               Charts
             </div>
           </a>
 
-          <a class="item">
+          <a className="item">
             <div>
-              <i class="icon lightbulb"></i>
-              Apps
+              <i className="icon lightbulb"></i>
+              Generate Passports
             </div>
           </a>
-          <div class="item">
-            <div class="header">Other</div>
-            <div class="menu">
-              <a href="#" class="item">
+          <div className="item">
+            <div className="header">Other</div>
+            <div className="menu">
+              <a href="#" className="item">
                 <div>
-                  <i class="icon envelope"></i>
-                  Messages
+                  <i className="icon envelope"></i>
+                  Batches
                 </div>
               </a>
 
-              <a href="#" class="item">
+              <a href="#" className="item">
                 <div>
-                  <i class="icon calendar alternate"></i>
-                  Calendar
+                  <i className="icon dollar alternate"></i>
+                  Generate Seat Nos
                 </div>
               </a>
 
-              <a href="#" className="item" onClick={logout}>
-                <i className="sign-out icon"></i>
-                Logout
+              <a href="#" className="item">
+                <div>
+                  <i className="icon user alternate"></i>
+                  User Roles
+                </div>
+              </a>
+              <a href="#" className="item">
+                <div>
+                  <i className="icon calendar alternate"></i>
+                  Track Application
+                </div>
               </a>
             </div>
           </div>
-
-          <div class="item">
-            <form action="#">
-              <div class="ui mini action input">
-                <input type="text" placeholder="Search..." />
-                <button class="ui mini icon button">
-                  <i class=" search icon"></i>
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="ui segment inverted">
-            <div class="ui tiny olive inverted progress">
-              <div class="bar"></div>
-              <div class="label">Monthly Bandwidth</div>
+          <div className="ui segment inverted">
+            <div className="ui tiny olive inverted progress">
+              <div className="bar"></div>
+              <div class="label">Registration Strength </div>
             </div>
 
-            <div class="ui tiny teal inverted progress">
-              <div class="bar"></div>
-              <div class="label">Disk Usage</div>
+            <div className="ui tiny teal inverted progress">
+              <div className="bar"></div>
+              <div className="label">Application Progress</div>
             </div>
+
+            <a href="#" className="item" onClick={logout}>
+              <i className="sign-out icon"></i>
+              Logout
+            </a>
           </div>
         </div>
 
@@ -112,6 +114,7 @@ const AdminNavbar = () => {
                 <i className="wrench icon"></i>
                 Settings
               </a>
+
               <a href="#" onClick={logout} className="item">
                 <i className="sign-out icon"></i>
                 Logout

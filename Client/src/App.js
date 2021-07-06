@@ -14,6 +14,7 @@ import AuthRoute from "./components/utils/AuthRoute";
 import { AuthProvider } from "./context/auth";
 import ResolveNav from "./components/Layouts/Navbar/ResolveNav.js";
 import Dashboard from "./components/Pages/Admin/Dashboard";
+import Users from "./components/Pages/User/Users.js";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/posts" component={Posts} />
-                <Route exact path="/dashboard" component={Dashboard} />
+
+                <Route exact path="/users" component={Users} />
                 <AuthRoute path="/login" component={Login} />
                 <AuthRoute path="/register" component={Register} />
                 <AuthRoute path="/dashboard" component={Dashboard} />
