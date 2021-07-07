@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar.js";
 
@@ -17,40 +17,34 @@ const MenuBar = () => {
   const menuBar = user ? (
     <AdminNavbar />
   ) : (
-    <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item
-        name="home"
-        active={activeItem === "home"}
-        onClick={handlItemClick}
-        as={Link}
-        to="/"
-      />
-
-      <Menu.Item
-        name="posts"
-        active={activeItem === "posts"}
-        onClick={handlItemClick}
-        as={Link}
-        to="/posts"
-      />
-
-      <Menu.Menu position="right">
+    <Menu inverted pointing size="large">
+      <Container>
         <Menu.Item
-          name="login"
-          active={activeItem === "login"}
+          name="OPMS"
+          active={activeItem === "OPMS"}
           onClick={handlItemClick}
           as={Link}
-          to="/login"
+          to="/"
         />
 
-        <Menu.Item
-          name="register"
-          active={activeItem === "register"}
-          onClick={handlItemClick}
-          as={Link}
-          to="/register"
-        />
-      </Menu.Menu>
+        <Menu.Menu position="right">
+          <Menu.Item
+            name="login"
+            active={activeItem === "login"}
+            onClick={handlItemClick}
+            as={Link}
+            to="/login"
+          />
+
+          <Menu.Item
+            name="register"
+            active={activeItem === "register"}
+            onClick={handlItemClick}
+            as={Link}
+            to="/register"
+          />
+        </Menu.Menu>
+      </Container>
     </Menu>
   );
   return menuBar;

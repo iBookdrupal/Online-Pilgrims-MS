@@ -15,15 +15,18 @@ import { AuthProvider } from "./context/auth";
 import ResolveNav from "./components/Layouts/Navbar/ResolveNav.js";
 import Dashboard from "./components/Pages/Admin/Dashboard";
 import Users from "./components/Pages/User/Users.js";
+import RegisterForm from "./components/Pages/Registration/RegisterForm";
+
+import PageNotFound from "./components/Pages/PageNotFound/PageNotFound";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <>
-          <Container>
-            <div className="App">
-              <ResolveNav />
+          <div className="App">
+            <ResolveNav />
+            <Container>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/posts" component={Posts} />
@@ -32,10 +35,13 @@ function App() {
                 <AuthRoute path="/login" component={Login} />
                 <AuthRoute path="/register" component={Register} />
                 <AuthRoute path="/dashboard" component={Dashboard} />
+                <Route path="/registration" component={RegisterForm} />
+
+                <Route component={PageNotFound} />
               </Switch>
-            </div>
-            <Footer />
-          </Container>
+            </Container>
+          </div>
+          <Footer />
         </>
       </BrowserRouter>
     </AuthProvider>

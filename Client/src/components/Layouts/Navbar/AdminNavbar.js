@@ -24,7 +24,7 @@ const AdminNavbar = () => {
           <div className="item">
             <div className="header">Registration</div>
             <div className="menu">
-              <a className="item">
+              <a className="item" href={"/registration"}>
                 <div>
                   <i className="cogs icon"></i>Bio-Data
                 </div>

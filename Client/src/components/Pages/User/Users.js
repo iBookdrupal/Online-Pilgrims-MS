@@ -12,7 +12,7 @@ const Users = () => {
 
   if (loading) return <h1>Loading Users...</h1>;
   if (error) return <h1>error</h1>;
-
+  console.log(data.getUsers);
   return (
     <>
       <div className="pusher">
@@ -26,17 +26,16 @@ const Users = () => {
                   <Table.HeaderCell>Action</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
+              {!user && <h2> User not authenticated</h2>}
 
               {data.getUsers &&
                 data.getUsers.map((user) => (
                   <Table.Body>
-                    <Table.Row>
-                      <UserCard
-                        key={user.id}
-                        user={user}
-                        style={{ marginBottom: 20 }}
-                      />
-                    </Table.Row>
+                    <UserCard
+                      key={user.id}
+                      user={user}
+                      style={{ marginBottom: 20 }}
+                    />
                   </Table.Body>
                 ))}
             </Table>

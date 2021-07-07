@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Grid, Image } from "semantic-ui-react";
 import PostCard from "../Post/PostCard";
 import PostForm from "../Post/PostForm";
+import HomepageLayout from "./HomepageLayout.jsx";
 import { FETCH_POSTS_QUERY } from "../../../api/posts";
 
 import { AuthContext } from "./../../../context/auth";
@@ -17,7 +18,7 @@ const Home = () => {
   return (
     <>
       <div className="content">
-        <h2>Home Page</h2>
+        <HomepageLayout />
       </div>
     </>
   );
