@@ -1,152 +1,56 @@
-import React, { useContext } from "react";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Chart from "../Chart/Chart.jsx";
+import GroupedChart from "../Chart/GroupedChart.jsx";
+import DoughnutChart from "../Chart/DoughnutChart.jsx";
+import PieChart from "../Chart/PieChart.jsx";
 import { useQuery } from "@apollo/react-hooks";
-import { Grid, Image } from "semantic-ui-react";
 
-import { AuthContext } from "./../../../context/auth";
-import "./Dashboard.css";
+import { FETCH_USERS_QUERY } from "../../../api/user.js";
 
-const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function Dashboard() {
+  const { loading, error, data } = useQuery(FETCH_USERS_QUERY);
+  const classes = useStyles();
 
   return (
-    <>
-      <div className="pusher">
-        <div className="main-content">
-          <div className="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
-            <div className="bg-gray-800 pt-3">
-              <div className="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
-                <h3 className="font-bold pl-2">Analytics</h3>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap">
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-green-600">
-                        <i className="fa fa-wallet fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">
-                        Total Revenue
-                      </h5>
-                      <h3 className="font-bold text-3xl">
-                        $3249{" "}
-                        <span className="text-green-500">
-                          <i className="fas fa-caret-up"></i>
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-pink-600">
-                        <i className="fas fa-users fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">
-                        Total Users
-                      </h5>
-                      <h3 className="font-bold text-3xl">
-                        249{" "}
-                        <span className="text-pink-500">
-                          <i className="fas fa-exchange-alt"></i>
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-yellow-600">
-                        <i className="fas fa-user-plus fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">
-                        New Users
-                      </h5>
-                      <h3 className="font-bold text-3xl">
-                        2{" "}
-                        <span className="text-yellow-600">
-                          <i className="fas fa-caret-up"></i>
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                -->
-              </div>
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-blue-600">
-                        <i className="fas fa-server fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">
-                        Server Uptime
-                      </h5>
-                      <h3 className="font-bold text-3xl">152 days</h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-indigo-600">
-                        <i className="fas fa-tasks fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">
-                        To Do List
-                      </h5>
-                      <h3 className="font-bold text-3xl">7 tasks</h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-                <div className="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5">
-                  <div className="flex flex-row items-center">
-                    <div className="flex-shrink pr-4">
-                      <div className="rounded-full p-5 bg-red-600">
-                        <i className="fas fa-inbox fa-2x fa-inverse"></i>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-right md:text-center">
-                      <h5 className="font-bold uppercase text-gray-600">Issues</h5>
-                      <h3 className="font-bold text-3xl">
-                        3{" "}
-                        <span className="text-red-500">
-                          <i className="fas fa-caret-up"></i>
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="main-content">
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>
+              <Chart />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>
+              <GroupedChart />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>
+              <DoughnutChart />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>
+              <PieChart />
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
-    </>
+    </div>
   );
-};
-
-export default Dashboard;
+}

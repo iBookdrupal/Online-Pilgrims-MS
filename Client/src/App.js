@@ -15,7 +15,8 @@ import { AuthProvider } from "./context/auth";
 import ResolveNav from "./components/Layouts/Navbar/ResolveNav.js";
 import Dashboard from "./components/Pages/Admin/Dashboard";
 import Users from "./components/Pages/User/Users.js";
-import RegisterForm from "./components/Pages/Registration/RegisterForm";
+import Registration from "./components/Pages/Registration/Registration";
+import Biodata from "./components/Pages/Registration/Biodata";
 
 import PageNotFound from "./components/Pages/PageNotFound/PageNotFound";
 
@@ -34,16 +35,17 @@ function App() {
                 <Route exact path="/users" component={Users} />
                 <AuthRoute path="/login" component={Login} />
                 <AuthRoute path="/register" component={Register} />
-                <AuthRoute path="/dashboard" component={Dashboard} />
-                <Route path="/registration" component={RegisterForm} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/registration" component={Registration} />
+                <Route path="/biodata" component={Biodata} />
 
                 <Route component={PageNotFound} />
               </Switch>
             </Container>
           </div>
-          <Footer />
         </>
       </BrowserRouter>
+      <Footer />
     </AuthProvider>
   );
 }
