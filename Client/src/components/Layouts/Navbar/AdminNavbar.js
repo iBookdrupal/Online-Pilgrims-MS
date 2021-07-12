@@ -13,7 +13,7 @@ const AdminNavbar = () => {
           <div className="item">
             <div className="header">General</div>
             <div className="menu">
-              <a className="item" href="/dashboard">
+              <a className="item" href={"/dashboard"}>
                 <div>
                   <i className="icon tachometer alternate"></i>
                   {user.username} Dashboard

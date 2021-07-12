@@ -12,6 +12,29 @@ module.exports = gql`
     commentCount: Int!
   }
 
+  type Registration {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    OtherNames: String!
+    Religion: String
+    phoneNo: String
+    ContactAddress: String
+    State: String
+    LocalGovt: String
+    Ward: String
+    NextofKinFullName: String!
+    NextOfKinEmail: String
+    NextofKinAddress: String
+    createdAt: String!
+  }
+
+  type Batch {
+    id: ID!
+    batchName: String!
+    createdAt: String!
+  }
+
   type Comment {
     id: ID!
     createdAt: String!
@@ -32,6 +55,7 @@ module.exports = gql`
     username: String!
     createdAt: String!
   }
+
   input RegisterInput {
     username: String!
     password: String!
@@ -39,15 +63,44 @@ module.exports = gql`
     email: String!
   }
 
+  input RegistrationInput {
+    firstName: String!
+    lastName: String!
+    OtherNames: String!
+    Religion: String
+    phoneNo: String
+    ContactAddress: String
+    State: String
+    LocalGovt: String
+    Ward: String
+    NextofKinFullName: String!
+    NextOfKinEmail: String
+    NextofKinAddress: String
+    createdAt: String!
+  }
+
+  input BatchInput {
+    batchName: String!
+    createdAt: String
+  }
+
   type Query {
     getPosts: [Post]
     getUsers: [User]
     getPost(postId: ID!): Post
+    getRegistrations: [Registration]
+    getBatch: [Batch]
   }
 
   type Mutation {
+    registration(registrationInput: RegistrationInput): Registration
+
+    batch(batchInput: BatchInput): Batch!
+    deleteBatch(batchId: ID!): String!
+
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+
     createPost(body: String!): Post!
     deletePost(postId: ID!): String!
     createComment(postId: String!, body: String!): Post!

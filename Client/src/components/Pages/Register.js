@@ -99,10 +99,18 @@ const Register = (props) => {
         </Grid>
       </Form>
 
-      <div className="ui error message">
+      <div className="ui error ">
         <ul className="list">
           {Object.keys(errors).length > 0 &&
-            Object.values(errors).map((value) => <li key={value}>{value} </li>)}
+            Object.values(errors).map((value) => (
+              <li
+                className=" ui error message"
+                key={value}
+                style={{ listStyle: "none" }}
+              >
+                {value}{" "}
+              </li>
+            ))}
         </ul>
       </div>
     </div>

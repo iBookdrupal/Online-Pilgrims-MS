@@ -12,7 +12,7 @@ import {
 import { Field, Form, Formik, FormikConfig, FormikValues } from "formik";
 import { CheckboxWithLabel, TextField } from "formik-material-ui";
 import { object, mixed, number } from "yup";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
@@ -24,6 +24,32 @@ import Upload from "material-ui-upload/Upload";
 
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 10,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -74,7 +100,7 @@ const Registration = () => {
     <div className="main-content">
       <Card>
         <CardContent>
-          <h2>Registration</h2>
+          <h2 style={{ textAlign: "center" }}>Registration</h2>
           <FormikStepper
             initialValues={{
               firstName: "",
@@ -97,7 +123,7 @@ const Registration = () => {
             <FormikStep label="Mor Info">
               <Box paddingBottom={2}>
                 <Grid container spacing={3}>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -108,7 +134,7 @@ const Registration = () => {
                       />
                     </Paper>
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -119,7 +145,7 @@ const Registration = () => {
                       />
                     </Paper>
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -160,7 +186,7 @@ const Registration = () => {
                     <Paper className={classes.paper}>
                       <FormControl className={classes.formControl} fullWidth>
                         <InputLabel htmlFor="uncontrolled-native">
-                          Gender
+                          Religion
                         </InputLabel>
                         <NativeSelect
                           onChange={handleChange}
@@ -201,7 +227,7 @@ const Registration = () => {
               </Box>
               <Box paddingBottom={2}>
                 <Grid container spacing={3}>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -212,7 +238,7 @@ const Registration = () => {
                       />
                     </Paper>
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -223,7 +249,7 @@ const Registration = () => {
                       />
                     </Paper>
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
@@ -278,15 +304,92 @@ const Registration = () => {
               </Box>
             </FormikStep>
             <FormikStep>
-              <Box paddingBottom={2}>
-                <Field
-                  fullWidth
-                  name="description"
-                  component={TextField}
-                  label="Description"
-                  variant="outlined"
-                />
-              </Box>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Document Type</StyledTableCell>
+                      <StyledTableCell align="right">File Type</StyledTableCell>
+                      <StyledTableCell align="right">Action</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        <strong>Passport</strong>
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Field
+                          fullWidth
+                          size="small"
+                          type="file"
+                          name="passport"
+                          component={TextField}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Button
+                          variant="contained"
+                          color="default"
+                          className={classes.button}
+                          startIcon={<CloudUploadIcon />}
+                          size="small"
+                        >
+                          Upload
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        <strong>Payment Receipt</strong>
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Field
+                          fullWidth
+                          size="small"
+                          type="file"
+                          name="paymentReceipt"
+                          component={TextField}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Button
+                          variant="contained"
+                          color="default"
+                          className={classes.button}
+                          startIcon={<CloudUploadIcon />}
+                        >
+                          Upload
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        <strong>ID Card/Voters Card </strong>
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Field
+                          fullWidth
+                          size="small"
+                          type="file"
+                          name="passport"
+                          component={TextField}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Button
+                          variant="contained"
+                          color="default"
+                          className={classes.button}
+                          startIcon={<CloudUploadIcon />}
+                        >
+                          Upload
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </FormikStep>
           </FormikStepper>
         </CardContent>

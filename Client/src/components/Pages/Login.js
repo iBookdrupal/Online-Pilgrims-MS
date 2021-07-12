@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { gql } from "graphql-tag";
 import { Form, Button, Grid, Segment, Message } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "graphql-tag";
 import { useForm } from "../utils/hooks";
 import { AuthContext } from "../../context/auth";
+import { LOGIN_USER } from "../../api/user.js";
 
 const Login = (props) => {
-  const context = useContext(AuthContext);
+  const { user, context } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginUserCalback, {
@@ -76,27 +77,22 @@ const Login = (props) => {
           </Grid.Column>
         </Grid>
       </Form>
-
-      <div className="ui error message">
+      <div className="ui error ">
         <ul className="list">
           {Object.keys(errors).length > 0 &&
-            Object.values(errors).map((value) => <li key={value}>{value} </li>)}
+            Object.values(errors).map((value) => (
+              <li
+                className=" ui error message"
+                key={value}
+                style={{ listStyle: "none" }}
+              >
+                {value}{" "}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
   );
 };
-
-const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`;
 
 export default Login;

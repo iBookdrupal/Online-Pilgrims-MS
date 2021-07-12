@@ -8,7 +8,7 @@ const data = {
   datasets: [
     {
       type: "line",
-      label: "Dataset 1",
+      label: "Registered",
       borderColor: "rgb(54, 162, 235)",
       borderWidth: 2,
       fill: false,
@@ -16,7 +16,7 @@ const data = {
     },
     {
       type: "bar",
-      label: "Dataset 2",
+      label: "Approved",
       backgroundColor: "rgb(255, 99, 132)",
       data: [rand(), rand(), rand(), rand(), rand(), rand(), rand()],
       borderColor: "white",
@@ -24,7 +24,7 @@ const data = {
     },
     {
       type: "bar",
-      label: "Dataset 3",
+      label: "Pending",
       backgroundColor: "rgb(75, 192, 192)",
       data: [rand(), rand(), rand(), rand(), rand(), rand(), rand()],
     },

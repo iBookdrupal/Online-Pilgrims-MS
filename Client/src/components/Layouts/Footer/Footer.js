@@ -1,5 +1,3 @@
-import React from "react";
-import "./Footer.css";
 import {
   Button,
   Container,
@@ -14,6 +12,8 @@ import {
   Sidebar,
   Visibility,
 } from "semantic-ui-react";
+
+import "./Footer.css";
 export const Footer = () => {
   return (
     <footer>
@@ -27,16 +27,16 @@ export const Footer = () => {
                   <List.Item as="a">Sitemap</List.Item>
                   <List.Item as="a">Contact Us</List.Item>
                   <List.Item as="a">Religious Ceremonies</List.Item>
-                  <List.Item as="a">Gazebo Plans</List.Item>
+                  <List.Item as="a">About</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
                 <Header inverted as="h4" content="Services" />
                 <List link inverted>
-                  <List.Item as="a">Banana Pre-Order</List.Item>
-                  <List.Item as="a">DNA FAQ</List.Item>
-                  <List.Item as="a">How To Access</List.Item>
-                  <List.Item as="a">Favorite X-Men</List.Item>
+                  <List.Item as="a">Online Registration</List.Item>
+                  <List.Item as="a">Track Application</List.Item>
+                  <List.Item as="a">Generate Passport</List.Item>
+                  <List.Item as="a">Travel for Pilgrimage</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
@@ -44,8 +44,8 @@ export const Footer = () => {
                   About Online Pilgrims Management System
                 </Header>
                 <p>
-                  Extra space for a call to action inside the footer that could
-                  help re-engage users.
+                  Help Adamawa State Pilgrims for pilgrimage to their religious
+                  place of witness and observations.{" "}
                 </p>
               </Grid.Column>
             </Grid.Row>

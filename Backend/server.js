@@ -1,9 +1,8 @@
 const { ApolloServer, PubSub } = require("apollo-server");
 const mongoose = require("mongoose");
 const { MONGODB } = require("./config/config");
-const Post = require("./Models/Post");
 const typeDefs = require("./graphql/typeDefs");
-const resolvers = require("./graphql/resolvers");
+const resolvers = require("./graphql/resolvers/indexResolvers");
 
 const pubsub = new PubSub();
 

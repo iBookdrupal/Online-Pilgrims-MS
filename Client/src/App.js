@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 //import { Navbar } from "./components/Layouts/Navbar/Navbar";
 import { Footer } from "./components/Layouts/Footer/Footer";
 import Home from "./components/Pages/Home/Home";
@@ -10,7 +11,6 @@ import { Container } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-import AuthRoute from "./components/utils/AuthRoute";
 import { AuthProvider } from "./context/auth";
 import ResolveNav from "./components/Layouts/Navbar/ResolveNav.js";
 import Dashboard from "./components/Pages/Admin/Dashboard";
@@ -20,7 +20,10 @@ import Biodata from "./components/Pages/Registration/Biodata";
 
 import PageNotFound from "./components/Pages/PageNotFound/PageNotFound";
 
+import { AuthContext } from "./context/auth.js";
+
 function App() {
+  const { user } = useContext(AuthContext);
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -31,11 +34,12 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/posts" component={Posts} />
-
                 <Route exact path="/users" component={Users} />
-                <AuthRoute path="/login" component={Login} />
-                <AuthRoute path="/register" component={Register} />
-                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+
+                <Route path="/dashboard" component={Dashboard} exact />
+
                 <Route path="/registration" component={Registration} />
                 <Route path="/biodata" component={Biodata} />
 
