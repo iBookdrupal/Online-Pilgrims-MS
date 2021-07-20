@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { gql } from "graphql-tag";
 import {
   Card,
   CardContent,
@@ -32,6 +33,10 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+
+import { useMutation } from "@apollo/react-hooks";
+import { useForm } from "../../utils/hooks";
+import { FETCH_REGISTRATION_QUERY } from "../../../api/registration";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -84,7 +89,7 @@ const Registration = () => {
   const [gender, setGender] = React.useState("Male");
   const [state, setState] = React.useState({
     age: "",
-    name: "hai",
+    name: "",
   });
 
   const handleChange = (event) => {
@@ -95,7 +100,34 @@ const Registration = () => {
     });
   };
 
-  const onFileLoad = (e, file) => console.log(e.target.result, file.name);
+  const { onChange, onSubmit, values } = useForm(registrationUser, {
+    firstName: "",
+    lastName: "",
+    otherNames: "",
+    phoneNo: "",
+    localGovt: "",
+    ward: "",
+    state: "",
+    contactAddress: "",
+    gender: "",
+    religion: "",
+    nextofKinFullName: "",
+    nextofKinAddress: "",
+    nextofKinPhoneNo: "",
+    nextofKinEmail: "",
+  });
+
+  const [addRegistration, { loading }] = useMutation(REGISTRATION_USER, {
+    update(proxy, { data: { registration: userData } }) {
+      //props.history("/");
+    },
+    variables: values,
+  });
+
+  function registrationUser() {
+    addRegistration();
+  }
+
   return (
     <div className="main-content">
       <Card>
@@ -105,20 +137,20 @@ const Registration = () => {
             initialValues={{
               firstName: "",
               lastName: "",
-              OtherNames: "",
-              PhoneNo: "",
-              LocalGovt: "",
-              Ward: "",
-              State: "",
-              ContactAddress: "",
-              Gender: "",
-              Religion: "",
-              NextofKinFullName: "",
-              NextofKinAddress: "",
-              NextofKinPhoneNo: "",
-              NextofKinEmail: "",
+              otherNames: "",
+              phoneNo: "",
+              localGovt: "",
+              ward: "",
+              state: "",
+              contactAddress: "",
+              gender: "",
+              religion: "",
+              nextofKinFullName: "",
+              nextofKinAddress: "",
+              nextofKinPhoneNo: "",
+              nextofKinEmail: "",
             }}
-            onSubmit={() => {}}
+            onSubmit={onSubmit}
           >
             <FormikStep label="Mor Info">
               <Box paddingBottom={2}>
@@ -142,6 +174,7 @@ const Registration = () => {
                         component={TextField}
                         label="Last Name"
                         variant="outlined"
+                        maxLength={20}
                       />
                     </Paper>
                   </Grid>
@@ -149,7 +182,7 @@ const Registration = () => {
                     <Paper className={classes.paper}>
                       <Field
                         fullWidth
-                        name="othernames"
+                        name="otherNames"
                         component={TextField}
                         label="Other Names"
                         variant="outlined"
@@ -172,7 +205,7 @@ const Registration = () => {
                           defaultValue="Male"
                           variant="outlined"
                           inputProps={{
-                            name: "name",
+                            name: "gender",
                             id: "uncontrolled-native",
                           }}
                         >
@@ -192,7 +225,7 @@ const Registration = () => {
                           onChange={handleChange}
                           defaultValue="Islam"
                           inputProps={{
-                            name: "name",
+                            name: "religion",
                             id: "uncontrolled-native",
                           }}
                         >
@@ -219,7 +252,7 @@ const Registration = () => {
               <Box paddingBottom={2}>
                 <Field
                   fullWidth
-                  name="address"
+                  name="contactAddress"
                   component={TextField}
                   label="Contact Address"
                   variant="outlined"
@@ -277,7 +310,7 @@ const Registration = () => {
               <Box paddingBottom={2}>
                 <Field
                   fullWidth
-                  name="nextOfKinAdress"
+                  name="nextofKinAddress"
                   component={TextField}
                   variant="outlined"
                   label="Next of Kin Address"
@@ -287,7 +320,7 @@ const Registration = () => {
                 <Field
                   fullWidth
                   type="number"
-                  name="nextOfKinPhonNo"
+                  name="nextofKinPhoneNo"
                   component={TextField}
                   label="Next of Kin Phone Number"
                   variant="outlined"
@@ -296,7 +329,8 @@ const Registration = () => {
               <Box paddingBottom={2}>
                 <Field
                   fullWidth
-                  name="nextOfKinEmail"
+                  type="email"
+                  name="nextofKinEmail"
                   component={TextField}
                   label="Next of Kin Email"
                   variant="outlined"
@@ -428,6 +462,9 @@ export function FormikStepper({
       {...props}
       onSubmit={async (values, helpers) => {
         if (isLastStep()) {
+          console.log(values);
+          console.log(helpers);
+
           await props.onSubmit(values, helpers);
         } else {
           setStep((s) => s + 1);
@@ -459,3 +496,53 @@ export function FormikStepper({
     </Formik>
   );
 }
+
+const REGISTRATION_USER = gql`
+  mutation registration(
+    $firstName: String
+    $lastName: String
+    $otherNames: String
+    $gender: String
+    $religion: String
+    $phoneNo: String
+    $contactAddress: String
+    $state: String
+    $localGovt: String
+    $nextofKinFullName: String
+    $nextofKinAddress: String
+    $nextofKinPhoneNo: String
+    $nextofKinEmail: String
+  ) {
+    registration(
+      registrationInput: {
+        firstName: $firstName
+        lastName: $lastName
+        otherNames: $otherNames
+        gender: $gender
+        religion: $religion
+        phoneNo: $phoneNo
+        contactAddress: $contactAddress
+        state: $state
+        localGovt: $localGovt
+        nextofKinFullName: $nextofKinFullName
+        nextofKinAddress: $nextofKinAddress
+        nextofKinPhoneNo: $nextofKinPhoneNo
+        nextofKinEmail: $nextofKinEmail
+      }
+    ) {
+      firstName
+      lastName
+      otherNames
+      religion
+      gender
+      phoneNo
+      contactAddress
+      state
+      localGovt
+      nextofKinFullName
+      nextofKinAddress
+      nextofKinPhoneNo
+      nextofKinEmail
+    }
+  }
+`;

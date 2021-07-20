@@ -35,11 +35,10 @@ const Register = (props) => {
   return (
     <div className="form-container">
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
-        <h1>Register </h1>
-
         <Grid textAlign="center" verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Segment stacked>
+              <h1>Register </h1>
               <Form.Input
                 fluid
                 icon="user"

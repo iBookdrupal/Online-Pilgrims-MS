@@ -20,7 +20,7 @@ const MenuBar = () => {
     <Menu inverted pointing size="large">
       <Container>
         <Menu.Item
-          name="OPMS"
+          name="Online Pilgrims Management System"
           active={activeItem === "OPMS"}
           onClick={handlItemClick}
           as={Link}

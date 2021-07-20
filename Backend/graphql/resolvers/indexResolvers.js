@@ -3,6 +3,7 @@ const commentsResolvers = require("./comments");
 const usersResolvers = require("./users");
 const registrationResolvers = require("./registrations");
 const batchResolvers = require("./batches");
+const userRoleResolvers = require("./userRoles");
 
 module.exports = {
   Post: {
@@ -14,6 +15,7 @@ module.exports = {
     ...usersResolvers.Query,
     ...registrationResolvers.Query,
     ...batchResolvers.Query,
+    ...userRoleResolvers.Query,
   },
 
   Mutation: {
@@ -22,6 +24,7 @@ module.exports = {
     ...commentsResolvers.Mutation,
     ...registrationResolvers.Mutation,
     ...batchResolvers.Mutation,
+    ...userRoleResolvers.Mutation,
   },
   Subscription: {
     ...postsResolvers.Subscription,

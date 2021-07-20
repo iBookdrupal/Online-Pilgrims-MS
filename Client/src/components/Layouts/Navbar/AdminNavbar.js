@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../context/auth.js";
+import RegistrationList from "../../../components/Pages/Registration/RegistrationList.jsx";
 
 const AdminNavbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -24,7 +25,7 @@ const AdminNavbar = () => {
           <div className="item">
             <div className="header">Registration</div>
             <div className="menu">
-              <a className="item" href={"/registration"}>
+              <a className="item" href="/registrationList">
                 <div>
                   <i className="cogs icon"></i>Bio-Data
                 </div>
@@ -53,7 +54,7 @@ const AdminNavbar = () => {
           <div className="item">
             <div className="header">Other</div>
             <div className="menu">
-              <a href="#" className="item">
+              <a href="/batches" className="item">
                 <div>
                   <i className="icon envelope"></i>
                   Batches
@@ -92,7 +93,7 @@ const AdminNavbar = () => {
               <div className="label">Application Progress</div>
             </div>
 
-            <a href="#" className="item" onClick={logout}>
+            <a href="#!" className="item" onClick={logout}>
               <i className="sign-out icon"></i>
               Logout
             </a>
@@ -115,7 +116,7 @@ const AdminNavbar = () => {
                 Settings
               </a>
 
-              <a href="#" onClick={logout} className="item">
+              <a href="!#" onClick={logout} className="item">
                 <i className="sign-out icon"></i>
                 Logout
               </a>

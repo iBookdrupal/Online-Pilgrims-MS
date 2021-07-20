@@ -1,5 +1,5 @@
 import React, { useContext, Redirect } from "react";
-import { useHistory } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -27,7 +27,6 @@ export default function Dashboard(props) {
   const { loading, error, data } = useQuery(FETCH_USERS_QUERY);
   const classes = useStyles();
   const { user } = useContext(AuthContext);
-  const history = useHistory();
 
   return (
     <>

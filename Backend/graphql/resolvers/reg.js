@@ -53,6 +53,7 @@ module.exports = {
       });
 
       const res = await newRegistration.save();
+      console.log(res);
 
       return {
         ...res._doc,

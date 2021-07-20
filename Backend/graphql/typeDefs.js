@@ -11,30 +11,6 @@ module.exports = gql`
     likeCount: Int!
     commentCount: Int!
   }
-
-  type Registration {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    OtherNames: String!
-    Religion: String
-    phoneNo: String
-    ContactAddress: String
-    State: String
-    LocalGovt: String
-    Ward: String
-    NextofKinFullName: String!
-    NextOfKinEmail: String
-    NextofKinAddress: String
-    createdAt: String!
-  }
-
-  type Batch {
-    id: ID!
-    batchName: String!
-    createdAt: String!
-  }
-
   type Comment {
     id: ID!
     createdAt: String!
@@ -48,12 +24,49 @@ module.exports = gql`
     username: String!
   }
 
+  type Registration {
+    id: ID!
+    firstName: String
+    lastName: String
+    otherNames: String
+    religion: String
+    gender: String
+    phoneNo: String
+    contactAddress: String
+    state: String
+    localGovt: String
+    ward: String
+    nextofKinFullName: String
+    nextofKinEmail: String
+    nextofKinAddress: String
+    nextofKinPhoneNo: String
+    createdAt: String
+  }
+
+  type Batch {
+    id: ID!
+    batchName: String!
+    createdAt: String!
+  }
+
   type User {
     id: ID!
     email: String!
     token: String!
     username: String!
     createdAt: String!
+  }
+
+  type UserRoles {
+    id: ID
+    roleName: String
+    createdAt: String
+  }
+
+  type Year {
+    id: ID!
+    year: String
+    batchID: ID!
   }
 
   input RegisterInput {
@@ -64,23 +77,29 @@ module.exports = gql`
   }
 
   input RegistrationInput {
-    firstName: String!
-    lastName: String!
-    OtherNames: String!
-    Religion: String
+    firstName: String
+    lastName: String
+    otherNames: String
+    religion: String
     phoneNo: String
-    ContactAddress: String
-    State: String
-    LocalGovt: String
-    Ward: String
-    NextofKinFullName: String!
-    NextOfKinEmail: String
-    NextofKinAddress: String
-    createdAt: String!
+    gender: String
+    contactAddress: String
+    state: String
+    localGovt: String
+    ward: String
+    nextofKinFullName: String
+    nextofKinEmail: String
+    nextofKinAddress: String
+    nextofKinPhoneNo: String
   }
 
   input BatchInput {
     batchName: String!
+    createdAt: String
+  }
+
+  input UserRolesInput {
+    roleName: String!
     createdAt: String
   }
 
@@ -90,6 +109,7 @@ module.exports = gql`
     getPost(postId: ID!): Post
     getRegistrations: [Registration]
     getBatch: [Batch]
+    getUserRoles: [UserRoles]
   }
 
   type Mutation {
@@ -100,6 +120,9 @@ module.exports = gql`
 
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+
+    userRole(userRolesInput: UserRolesInput): UserRoles!
+    deleteUserRole(userRoleId: ID!): String
 
     createPost(body: String!): Post!
     deletePost(postId: ID!): String!

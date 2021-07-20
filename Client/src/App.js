@@ -11,16 +11,19 @@ import { Container } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-import { AuthProvider } from "./context/auth";
+import { AuthContext, AuthProvider } from "./context/auth.js";
+import AuthRoute from "./components/utils/AuthRoute";
+
 import ResolveNav from "./components/Layouts/Navbar/ResolveNav.js";
+
 import Dashboard from "./components/Pages/Admin/Dashboard";
 import Users from "./components/Pages/User/Users.js";
 import Registration from "./components/Pages/Registration/Registration";
-import Biodata from "./components/Pages/Registration/Biodata";
+import RegistrationList from "./components/Pages/Registration/RegistrationList";
+
+import Batches from "./components/Pages/Batch/Batches";
 
 import PageNotFound from "./components/Pages/PageNotFound/PageNotFound";
-
-import { AuthContext } from "./context/auth.js";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -34,14 +37,19 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/posts" component={Posts} />
-                <Route exact path="/users" component={Users} />
+
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
 
-                <Route path="/dashboard" component={Dashboard} exact />
+                <AuthRoute exact path="/users" component={Users} />
+                <AuthRoute path="/dashboard" component={Dashboard} />
+                <AuthRoute path="/registration" component={Registration} />
+                <AuthRoute
+                  path="/registrationList"
+                  component={RegistrationList}
+                />
 
-                <Route path="/registration" component={Registration} />
-                <Route path="/biodata" component={Biodata} />
+                <AuthRoute path="/batches" component={Batches} />
 
                 <Route component={PageNotFound} />
               </Switch>

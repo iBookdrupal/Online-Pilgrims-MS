@@ -49,7 +49,8 @@ function AuthProvider(props) {
     });
   }
 
-  function logout() {
+  function logout(e) {
+    e.preventDefault();
     localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
   }
